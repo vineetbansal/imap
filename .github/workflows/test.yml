@@ -1,0 +1,33 @@
+name: Combined Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install combined environment
+        run: uv sync --group test
+
+      # Each project's pytest config lives in its own pyproject.toml.
+      # Passing -c sets rootdir to that directory, so relative testpaths resolve correctly.
+
+      - name: Test sds-data-manager
+        run: uv run pytest -c sds-data-manager/pyproject.toml
+
+      - name: Test imap_processing
+        run: uv run pytest -c imap_processing/pyproject.toml
+
+      - name: Test imap_L3_processing
+        run: uv run pytest imap_L3_processing/tests/

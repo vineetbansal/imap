@@ -1,0 +1,12 @@
+[submodule "sds-data-manager"]
+	path = sds-data-manager
+	url = https://github.com/IMAP-Science-Operations-Center/sds-data-manager
+	branch = dev
+[submodule "imap_processing"]
+	path = imap_processing
+	url = https://github.com/IMAP-Science-Operations-Center/imap_processing
+	branch = dev
+[submodule "imap_L3_processing"]
+	path = imap_L3_processing
+	url = https://github.com/IMAP-Science-Operations-Center/imap_L3_processing
+	branch = main

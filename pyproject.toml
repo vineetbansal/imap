@@ -1,0 +1,43 @@
+[project]
+name = "imap"
+version = "0.1.0"
+requires-python = ">=3.10,<4"
+# Install all three projects from their submodule paths.
+# sds-data-manager and imap_processing use Poetry so their runtime deps are
+# read via PEP 517 (poetry-core).  imap_L3_processing uses hatchling/uv.
+dependencies = [
+    "sds-data-manager",
+    "imap-processing",
+    "imap-l3-processing",
+]
+
+[tool.uv]
+# Don't install the root as a package — it is just an environment spec.
+package = false
+# imap_L3_processing pins imap-processing>=1.0.29 but the dev branch carries a
+# pre-release version number.  This override lets us use the local submodule
+# regardless of what downstream packages declare as their lower bound.
+override-dependencies = [
+    "imap-processing>=0",
+]
+
+[tool.uv.sources]
+sds-data-manager  = { path = "sds-data-manager",   editable = true }
+imap-processing   = { path = "imap_processing",     editable = true }
+imap-l3-processing = { path = "imap_L3_processing", editable = true }
+
+[dependency-groups]
+test = [
+    # shared
+    "pytest>=6.2.5",
+    "pytest-cov>=4.0.0",
+    # sds-data-manager test group (poetry group.tests)
+    "moto>=4.1.3",
+    "boto3>=1.26.78",
+    "sqlalchemy<3.0",
+    # imap_processing test extra
+    "openpyxl>=3.0.7",
+    "pytest-xdist>=3.2",
+    "netcdf4>=1.7.2",
+    "requests>=2.32.3",
+]
