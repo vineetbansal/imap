@@ -1,0 +1,16 @@
+[project]
+name = "sds-data-manager"
+version = "9.0.1"
+description = "IMAP Science Operations Center AWS data manager"
+requires-python = ">=3.10,<4"
+dependencies = ["imap-data-access>=0.37.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# dev-mode-exact skips package auto-discovery; dev-mode-dirs writes an
+# absolute path into the installed .pth file.  No symlinks needed.
+[tool.hatch.build.targets.wheel]
+dev-mode-exact = true
+dev-mode-dirs = ["../sds-data-manager"]

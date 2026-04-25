@@ -3,8 +3,10 @@ name = "imap"
 version = "0.1.0"
 requires-python = ">=3.10,<4"
 # Install all three projects from their submodule paths.
-# sds-data-manager and imap_processing use Poetry so their runtime deps are
-# read via PEP 517 (poetry-core).  imap_L3_processing uses hatchling/uv.
+# sds-data-manager is wrapped via sds-data-manager-wrap/ (hatchling shim that
+# symlinks the actual source) because the submodule's pyproject.toml has a
+# bare [project.urls] table without project.name, which fails uv's PEP 621
+# validation.  imap_processing uses Poetry; imap_L3_processing uses hatchling.
 dependencies = [
     "sds-data-manager",
     "imap-processing",
@@ -22,7 +24,7 @@ override-dependencies = [
 ]
 
 [tool.uv.sources]
-sds-data-manager  = { path = "sds-data-manager",   editable = true }
+sds-data-manager  = { path = "sds-data-manager-wrap", editable = true }
 imap-processing   = { path = "imap_processing",     editable = true }
 imap-l3-processing = { path = "imap_L3_processing", editable = true }
 
