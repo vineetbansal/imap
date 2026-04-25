@@ -29,5 +29,11 @@ jobs:
       - name: Test imap_processing
         run: uv run --frozen pytest --rootdir=. --confcutdir=. -c imap_processing/pyproject.toml --import-mode=importlib imap_processing/imap_processing/tests
 
+      - name: Setup git LFS for imap_L3_processing
+        working-directory: imap_L3_processing
+        run: |
+          git lfs install
+          git lfs pull
+
       - name: Test imap_L3_processing
-        run: uv run --frozen pytest imap_L3_processing/tests/
+        run: uv run --frozen python -m unittest discover -s imap_L3_processing/tests
