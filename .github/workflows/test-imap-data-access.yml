@@ -1,0 +1,24 @@
+name: Test imap-data-access
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install combined environment
+        run: uv sync --group test
+
+      - name: Test imap-data-access
+        run: uv run --frozen pytest --rootdir=. --confcutdir=. -c imap-data-access/pyproject.toml --import-mode=importlib imap-data-access/tests

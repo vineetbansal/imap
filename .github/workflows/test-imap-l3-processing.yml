@@ -1,4 +1,4 @@
-name: Combined Tests
+name: Test imap_L3_processing
 
 on:
   push:
@@ -19,15 +19,6 @@ jobs:
 
       - name: Install combined environment
         run: uv sync --group test
-
-      # Each project's pytest config lives in its own pyproject.toml.
-      # Passing -c sets rootdir to that directory, so relative testpaths resolve correctly.
-
-      - name: Test sds-data-manager
-        run: uv run --frozen pytest --rootdir=. --confcutdir=. -c sds-data-manager/pyproject.toml --import-mode=importlib sds-data-manager/tests
-
-      - name: Test imap_processing
-        run: uv run --frozen pytest --rootdir=. --confcutdir=. -c imap_processing/pyproject.toml --import-mode=importlib imap_processing/imap_processing/tests
 
       - name: Setup git LFS for imap_L3_processing
         working-directory: imap_L3_processing

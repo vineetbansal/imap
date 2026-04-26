@@ -10,7 +10,8 @@ requires-python = ">=3.10,<4"
 dependencies = [
     "sds-data-manager",
     "imap-processing",
-    "imap-l3-processing"
+    "imap-l3-processing",
+    "imap-data-access",
 ]
 
 [tool.uv]
@@ -27,6 +28,7 @@ override-dependencies = [
 sds-data-manager  = { path = "sds-data-manager-wrap", editable = true }
 imap-processing   = { path = "imap_processing",     editable = true }
 imap-l3-processing = { path = "imap_L3_processing", editable = true }
+imap-data-access  = { path = "imap-data-access",   editable = true }
 
 [dependency-groups]
 test = [

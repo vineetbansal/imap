@@ -10,3 +10,7 @@
 	path = imap_L3_processing
 	url = https://github.com/IMAP-Science-Operations-Center/imap_L3_processing
 	branch = main
+[submodule "imap-data-access"]
+	path = imap-data-access
+	url = https://github.com/IMAP-Science-Operations-Center/imap-data-access
+	branch = main
