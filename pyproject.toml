@@ -14,9 +14,16 @@ dependencies = [
     "imap-data-access",
 ]
 
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+# Only discover the top-level imap package; exclude submodule directories
+# (imap_processing/, imap_L3_processing/, etc.) from flat-layout scan.
+include = ["imap", "imap.*"]
+
 [tool.uv]
-# Don't install the root as a package — it is just an environment spec.
-package = false
 # imap_L3_processing pins imap-processing>=1.0.29 but the dev branch carries a
 # pre-release version number.  This override lets us use the local submodule
 # regardless of what downstream packages declare as their lower bound.

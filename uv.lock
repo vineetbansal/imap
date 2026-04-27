@@ -1182,7 +1182,7 @@ wheels = [
 [[package]]
 name = "imap"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "imap-data-access" },
     { name = "imap-l3-processing" },
